@@ -1,0 +1,39 @@
+Options -Multiviews
+
+RewriteEngine On
+
+
+RewriteBase /
+
+#RewriteCond %{HTTP_HOST} ^mekogas.com.vn
+#RewriteRule (.*) http://www.mekogas.com.vn/$1 [R=301,L]
+
+RewriteCond %{ENV:REDIRECT_STATUS} 200
+RewriteRule .* - [L]
+
+RewriteRule ^$ index.php?
+#product paging
+RewriteRule ^(tim-kiem|search)/page([0-9]+)/(.*)$ index.php?&view=$1&page=$2&hint=$3
+RewriteRule ^(tim-kiem|search)/s=([a-zA-Z0-9_-]*)&mb=([a-zA-Z0-9_-]*)&ab=([a-zA-Z0-9_-]*)&l=([\.a-zA-Z0-9_-]*)&mp=([a-zA-Z0-9_-]*)&ap=([a-zA-Z0-9_-]*)$ index.php?&view=$1&storey=$2&minBeds=$3&maxBeds=$4&landWidth=$5&minPrice=$6&maxPrice=$7
+RewriteRule ^(tim-kiem|search_sell)/s=([a-zA-Z0-9_-]*)&mb=([a-zA-Z0-9_-]*)&ab=([a-zA-Z0-9_-]*)&l=([\.a-zA-Z0-9_-]*)&mp=([a-zA-Z0-9_-]*)&ap=([a-zA-Z0-9_-]*)$ index.php?&view=$1&storey=$2&minBeds=$3&maxBeds=$4&landWidth=$5&minPrice=$6&maxPrice=$7
+RewriteRule ^([a-zA-Z0-9_-]+)/page([0-9]+)$ index.php?&view=$1&page=$2
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]*)-p([0-9]+)/page([0-9]+)$ index.php?&view=$1&pId=$3&page=$4
+
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?&view=$1
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-p([0-9]+)$ index.php?&view=$1&pId=$3
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-i([0-9]+)$ index.php?&view=$1&id=$3
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ index.php?&view=$1&act=$2
+#product paging
+RewriteRule ^([a-zA-Z0-9_-]+)/page([0-9]+)$ index.php?&view=$1&page=$2
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]*)-p([0-9]+)/page([0-9]+)$ index.php?&view=$1&pId=$3&page=$4
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-i([0-9]+)$ index.php?view=$1&id=$2
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-cate([0-9]+)$ index.php?view=$1&cate_id=$2
+
+
+
+
+
+
+
+
