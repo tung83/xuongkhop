@@ -3,31 +3,47 @@ class concierge extends base{
     function __construct($db){
         parent::__construct($db,5,'concierge');
     }
-    function ind_concierge($sum_text){
-        $str='
-        <div class="ind-concierge">  
-            <div class="container">
-                <div class="row">   
-                <div>    
-                    <div class="col-xs-12">
-                        <div class="title-head">
-                            <span>'
-                                .$this->title.' 
-                            </span>
-                        </div>
-                    </div>';
-            $str.='
-                    <div class="col-xs-12 wow fadeIn animated" data-wow-duration="1000ms">             
-                        <p class="sub-sum">'.$sum_text.'</p>
-                    </div>';   
-       
+    function ind_concierge($db){ 
         $str.='
-                    <div class="clearfix"></div>
-                       
-                    </div>
+        <section class="ind-concierge"> 
+            <div class="container">
+            <div class="row">
+            <div class="row">
+            <div class="col-xs-12">
+                <div class="title-head">
+                    <span>'.$this->title.'
+                    </span>
+                    <p class="sub-sum"><span>'
+                        .common::qtext($db,11).
+                    '</span></p>
                 </div>
-                </div>
+            </div>
+            <div class="clearfix"></div>';
+        $this->db->where('active',1)->where('home',1);
+        $this->db_orderBy();
+        $list=$this->db->get('concierge',3);   
+        foreach($list as $item){
+            $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
+            $str.='
+            <div class="col-md-4 col-sm-6 concierge-col wow bounceIn animated" data-wow-duration="2s">
+                <div class="concierge-item item">
+                    <a href="'.$lnk.'">
+                        <img src="'.webPath.$item['image'].'" class="img-responsive center-block"/>
+                    </a>               
+                </div>                
+                <a class href="'.$lnk.'">
+                    <div class="item-title">'.$item['title'].'
+                        
+                    <p class="item-feature">'.$item['feature'].'</p>   </div>  ';                     
+                 $str.='</a>
             </div>';
+        }
+        $str.=' 
+            <div class="clearfix"></div>            
+            </div>
+            </div>
+        </section>';
+        
         return $str;
     }
     function concierge_item($item){

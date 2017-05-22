@@ -60,42 +60,48 @@
         <footer>
             <div class="container">
                 <div class="row footer-content">
-                    <div class="col-md-6 footer-col col-xs-6 footer-menu">
+                    <div class="col-md-3 footer-col col-xs-6 footer-menu">
                         <div class="footer-menu-part">
                             <span class="footer-top-span">
-                                Site map
+                                Menu
                             </span>
                             <div>
-                                <img class="hidden-ms hidden-xs logo-footer" src="<?=frontPath?>logo2.jpg" alt="" style=""/>
                                 <?=foot_menu($db,$view)?>
                                 
                             </div>     
                         </div>
                     </div>
+                    
+                    <div class="col-md-3  footer-col col-xs-6">
+                        <div class="footer-product-part">
+                            <span class="footer-top-span">
+                                Điều trị xương khớp
+                            </span>
+                            <div>
+                                <?=foot_product_cate($db,$view)?>   
+                            </div>  
+                        </div>
+                    </div>
                     <div class="col-md-6 footer-col">
                         <div class="footer-contact-part">
-                            <span class="footer-top-span">
-                                Contact us
+                            <span class="footer-top-span">                                
+                                <?=social($db)?>
                             </span>    
                             <div>
-                                <?=common::qtext($db,4)?>
+                                <div>Copyright © 2017. All rights reserved.</div>
+                                <div>Designed by <a class="psmedia" href="http://psmedia.vn" target="_blank"><b>PSmedia.vn</b></a></div>
+                          
+                                <div id="counters">
+                                    <?php
+                                        $vs=new visitors($db);
+                                    ?>
+                                    <div>Đang online: <?= $vs->getOnlineVisitors() ?></div> 
+                                    <div>Lượt truy cập: <?= $vs->getCounter() ?></div>
+                                </div>
                             </div> 
                         </div>
                     </div>
                 </div>  
-            </div> 
-            <div class="copyright-wrapper">
-                <div class="container">             
-                    <div class="row bottom-footer">                
-                        <div >
-                            <div class="col-md-6 copyright">
-                                Copyright © 2017 <b class="company">JJ Ketsa Property Agents</b>. All rights reserved.
-                            </div>
-
-                            <?=social($db)?>
-                        </div>
-                    </div>
-                </div>
             </div>    
         </footer>
         </div>

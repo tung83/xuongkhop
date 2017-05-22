@@ -2,8 +2,9 @@
 //http://bootsnipp.com/snippets/z4Wor
 class product extends base{
     function __construct($db){        
-        parent::__construct($db,2,'product');
+        parent::__construct($db,3,'product');
     }
+    
     function ind_product($db){ 
         $str.='
         <section class="ind-product"> 
@@ -14,32 +15,13 @@ class product extends base{
                 <div class="title-head">
                     <span>'.$this->title.'
                     </span>
-                    <p class="sub-sum"><span>'
+                    <p class="sub-sum">'
                         .common::qtext($db,11).
-                    '</span></p>
+                    '</p>
                 </div>
             </div>
-            <div class="clearfix"></div>';
-        $this->db->where('active',1)->where('home',1);
-        $this->db_orderBy();
-        $list=$this->db->get('product',3);   
-        foreach($list as $item){
-            $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
-            $img=$this->first_image($item['id']);
-            $str.='
-            <div class="col-md-4 col-sm-6 product-col wow bounceIn animated" data-wow-duration="2s">
-                <div class="product-item item">
-                    <a href="'.$lnk.'">
-                        <img src="'.webPath.$img.'" class="img-responsive center-block"/>
-                    </a>               
-                </div>                
-                <a class href="'.$lnk.'">
-                    <p class="item-title">'.$item['title'].'</p>';                        
-                 $str.='</a>
-            </div>';
-        }
-        $str.=' 
-            <div class="clearfix"></div>            
+            <div class="clearfix"></div>     
+            </div>   
             </div>
             </div>
         </section>';

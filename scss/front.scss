@@ -57,25 +57,22 @@ a { color: $primary-color; @include animate( color, 320ms );
 
 #social_block { list-style: none; float:right;
     li{display: inline;
-        a{ display: inline-block; width: 40px; height: 40px; padding: 7px 11px; border: 1px solid #fff; border-radius: 50%;
+        a{ display: inline-block; width: 40px; height: 40px; padding: 10px 11px; border: 1px solid #fff; border-radius: 50%;
             i{ color: #fff; }  
             &.facebook-link{padding-left: 14px;}
         } 
     }
 }
-.title-head {text-align: center; margin-bottom: 60px;
+.title-head {margin-bottom: 40px;
     > span {
-        font-size: 51px;
-        font-weight: 580;
+        font-size: 45px;
         margin-top: 90px;
         margin-bottom: 10px;
         display: inline-block;
-        line-height: 80px;
+        line-height: 45px;
+        padding-left: 3px;
         color: #000;
-        padding-bottom: 20px;
-        &:after{content:"";border-bottom: 4px solid $pink;width: 185px; margin: auto; display: block; height: 10px;
-}
-
+        text-transform: uppercase;
     }
     .sub-sum{text-align: center; 
               span{ max-width: 680px; display: inline-block; }
@@ -89,17 +86,20 @@ a { color: $primary-color; @include animate( color, 320ms );
 	Header 
         ------------------------------------------------
 */
-.header{ background-color: #fff; color: #fff; 
+.header{ background-color: #fff; color: #000; 
 /* 
             Header Top content
     ------------------------------------------------
 */
-    .header-wrap{ background-color: #000; margin-bottom: 1px; border-top: 5px solid $light-grey;
+    .header-wrap{ background-color: #fff; margin-bottom: 1px; 
         .header-top{ margin: 8px 0 12px 0; font-size: 18px; 
            .header-right{height: 73px; margin-top: 35px; width: 440px; float:right;
-                .hotline{ float:right; line-height: 40px;
+                .hotline{ line-height: 40px; float: right;
                     span{ font-weight: bold;}
-                    a{color: $dark-pink;}
+                    a{color: $dark-pink;width: 270px; position:relative;display: block;
+                        img {position:absolute;top:0;right:0;}
+                    }
+                    
                 }
            }           
         }
@@ -111,8 +111,9 @@ a { color: $primary-color; @include animate( color, 320ms );
 */
     .menu-ground, .mobile-sub { background: $light-grey; }
     .menu-ground{ transition: all 1s ease;
-        .bigmegamenu{padding: 0 45px;}
-        .wsmenu > .wsmenu-list > li > a.active { background: #ff578f !important; color: #fff !important; }
+        .wsmenu > .wsmenu-list > li{vertical-align: middle; }
+    
+        .wsmenu > .wsmenu-list > li > a.active { background: #ffde16 !important; color: #fff !important; }
         .wsmenu > .wsmenu-list > li > a { color: #fff; text-transform: uppercase; border-radius: 0px; 
                                           font-weight: bold; 
                                           background: transparent !important;
@@ -120,38 +121,36 @@ a { color: $primary-color; @include animate( color, 320ms );
                                           
         }
         .wsmenu-submenu {top: 90px!important; min-width: 185px; background-color: transparent;
-            a {background: #ff578f !important;}
+            a {background: #ffde16 !important;}
         }
     }
 }
 .smallogo {
-    background: #000;
+    background: #000; padding-top: 3px !important;
 }
 
 @media (min-width: 992px){
-    .wsmenu > .wsmenu-list > li > a { font-size: 16px; line-height: 77px; }
+    .wsmenu > .wsmenu-list > li > a { font-size: 14px; line-height: 72px; }
 }
 /* 
 	Footer
         ------------------------------------------------
 */
 
-footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-top: 7px solid #575757;
+footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; color: $grey;border-top: 7px solid #575757;
     a{ color: $grey; }
     .footer-content { margin-bottom: 16px;
             .footer-top-span {
             display: inline-block;
-            color: $dark-blue;
+            color: #000;
             width: 100%;
             font-size: 22px;
             margin-bottom: 30px;
         }
         .logo-footer{float: right; padding-top: 10px;                     
         }
-        #counters{
-            margin-top: 30px;
-        }
-        ul { list-style: none;padding: 0; margin: 0; line-height: 32px;
+        #counters{margin-top: 10px; font-size: 14px;}
+        ul.product-menu,ul.foot-menu { list-style: none;padding: 0; margin: 0; line-height: 32px;
             li:before {
                 content: "\f0da";
                 font-size: 12px;
@@ -161,15 +160,14 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
             }
         }
     }
-    
-    .copyright-wrapper { background-color: #000; font-size: 18px; padding: 5px 0; 
-        .copyright { margin-top: 12px;
-            .company { color: #54273b; }
-            .psmedia { color: #86390d;}
+    .footer-top-span #social_block{ padding: 0; float:left; margin-bottom: -10px;
+        a {
+            border: none; padding: 0; width:20px;
+            i  {
+            color: #000;
+            }
         }
-        #social_block { display: block; overflow: hidden; float: right; font-size: 20px; margin-bottom: 0;
-        }
-    }    
+    } 
 }
 
 @media (min-width: 992px){
@@ -258,7 +256,7 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
                 margin: 0 20px 0 20px;
                 border-bottom: 1px solid #e3e3e3;
             }
-            &.active, &:focus {background-color: #ff578f;color: #fff !important;}
+            &.active, &:focus {background-color: #ffde16;color: #fff !important;}
             &.active hr, &:focus hr,&:last-child > hr {
                 display: none;
             }
@@ -361,7 +359,7 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
                 margin: 0 20px 0 20px;
                 border-bottom: 1px solid #e3e3e3;
             }
-            &.active, &:focus {background-color: #ff578f;color: #fff !important;}
+            &.active, &:focus {background-color: #ffde16;color: #fff !important;}
             &.active hr, &:focus hr,&:last-child > hr {
                 display: none;
             }
@@ -428,7 +426,7 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
                 margin: 0 20px 0 20px;
                 border-bottom: 1px solid #e3e3e3;
             }
-            &.active, &:focus {background-color: #ff578f;color: #fff !important;}
+            &.active, &:focus {background-color: #ffde16;color: #fff !important;}
             &.active hr, &:focus hr,&:last-child > hr {
                 display: none;
             }
@@ -441,38 +439,112 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
     .concierge-col{padding:0.5px; width: 20%!important;}
 }
 /* 
-	Partner
+	Duoc lieu
         ------------------------------------------------
 */
-#partner-section{background-color: #f7f7f7; padding: 85px 0;
-    .partner-col{width: 20%;}
+.ind-duoclieu{padding-bottom: 40px; background: url(/file/front/about_bg.png) repeat;
 }
-#slider-section{padding: 85px 0; }
+.duoclieu-col {
+    .duoclieu-item { overflow: hidden; 
+    box-shadow: 0px 0px 8px #e1e1e1;
+    position: relative;
+    background: #20adb9;
+          
+        img{
+            @include animate( transform, 0.3s );
+        }
+    }
+    &:hover .duoclieu-item img, &:focus .duoclieu-item img, &:active .duoclieu-item img, {@include transform( scale(1.1) ); 
+    }
+    .duoclieu-item-title{
+            min-height: 70px;
+            width: 100%;
+            color: #97f7ff;
+            padding: 15px 15px 15px 15px;
+            vertical-align: bottom;
+        }  
+    ul.duoclieu-menu {font-weight: normal;font-size: 16px;padding: 15px 0 5px 0;
+        li {position: relative;list-style-type: none;
+            a {text-transform: capitalize !important;color: #464646 !important;font-size: 13px;line-height: 35px;
+               span {width: 35px;display: inline-block;
+                     &::before {
+                        position: absolute;
+                        content: "";
+                        top: 46%;
+                        -webkit-transform: translateY(-50%);
+                        -moz-transform: translateY(-50%);
+                        -o-transform: translateY(-50%);
+                        -ms-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                        margin: 0 15px 0 20px;
+                        width: 0;
+                        height: 0;
+                        border-top: 3px solid transparent;
+                        border-bottom: 3px solid transparent;
+                        border-left: 3px solid #464646;
+                    }
+               }
+            }
+            > hr {
+                margin: 0 20px 0 20px;
+                border-bottom: 1px solid #e3e3e3;
+            }
+            &.active, &:focus {background-color: #ffde16;color: #fff !important;}
+            &.active hr, &:focus hr,&:last-child > hr {
+                display: none;
+            }
+        }
+    }
+} 
+
+/* 
+	Bai thuoc quy
+        ------------------------------------------------
+*/
+.ind-baithuocquy{padding-bottom: 40px;
+    .title-head span{border-left:2px solid $dark-grey;}
+    .baithuocquy-item-title {color: $dark-grey; }
+}
+
+/* 
+	News
+        ------------------------------------------------
+*/
+.ind-news{padding-bottom: 40px;
+    .title-head span{border-left:2px solid $dark-grey;}
+    .news-item-title {color: $dark-grey; }
+}
+
+/* 
+	Tu van
+        ------------------------------------------------
+*/
+.ind-tuvan{padding-bottom: 40px;
+    .title-head span{border-left:2px solid $dark-grey;}
+}
 /* 
 	About
         ------------------------------------------------
 */
-.ind-about{padding-bottom: 100px;
-    .about-title-head {text-align: center; margin-bottom: 60px;
+.ind-about{padding-bottom: 5px; background: url(/file/front/about_bg.png) repeat;
+    .about-title-head {text-align: center; margin-bottom: 10px;
             > span {
                 font-size: 66px;
                 font-weight: 580;
-                margin-top: 90px;
+                margin-top: 0px;
                 margin-bottom: 10px;
                 display: inline-block;
                 line-height: 80px;
                 color: #000;
                 padding-bottom: 20px;
                }
-            .sub-sum{text-align: center; 
-                      span{ max-width: 680px; display: inline-block; }
-            }
         }
         .about-col{padding: 0.5px;
             
         }
         .about-3dot img{width: 100%;}
 }
+.about-box{margin-bottom: 15px;}
 
 /* 
 	Contact
@@ -519,6 +591,12 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
               > span{@include animate( transform, 0.3s );color: #ea639e!important;background-color: transparent!important;}
               div{background-color: transparent!important;}
     }
+    .not-has-title .ws-title {
+    width: 0!important;
+    }
+    .not-has-title .ws_bullets {
+    bottom: 0!important;
+    }
 }
 
 
@@ -528,7 +606,35 @@ footer { background-color: $light-white; padding: 60px 0 0; color: $grey;border-
         .ws-title{height: 0px!important;}
     }
     .header{height: 51px!important;}
-    
+    .about-box img,.sell-box img,.product-box img, .buy-box img,.concierge-box img{
+      max-width: 100%!important; height: auto!important; margin-left: 0!important; margin-right:0 !important;
+}
+.ind-product,#search-page .product-list{ margin-right: 15px; margin-left: 15px;}
+.contact-wrap{
+       margin-left: 0!important; margin-right:0 !important;
+}
+.sub-sum  img{
+      max-width: 100%; height: auto; margin-left: 0!important; margin-right:0 !important;
+}
+ }
+@media (max-width: 767px){
+.wow {
+animation-duration: 0s !important;
+}
+.ind-sell, .ind-buy {
+padding: 30px 20px!important;
+}
+.search-box .search-form .form-group {
+    width: 45%;
+margin: 0!important;
+}
+.search-box{
+padding: 0;
+padding-top: 10px;
+}
+.search-box .search-button-group{
+ width: 90%!important;
+}
 }
 
 /* 

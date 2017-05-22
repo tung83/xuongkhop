@@ -10,6 +10,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.entities_latin = false;
 	config.height=250;
 	config.extraPlugins = 'lineheight';
+        config.allowedContent = true;
 	//cau hinh thanh cong cu
 	/*config.filebrowserImageBrowseUrl = 'ckfinder/ckfinder.html?type=Images';
     config.filebrowserFlashBrowseUrl = 'ckfinder/ckfinder.html?type=Flash';

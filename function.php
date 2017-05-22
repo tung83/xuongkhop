@@ -19,7 +19,7 @@ function menu($db,$view){
     <div class="header">
         <div class="wsmobileheader clearfix">
             <a id="wsnavtoggle" class="animated-arrow"><span></span></a>
-            <a href="'.myWeb.'" class="smallogo"><img src="'.frontPath.'logo.jpg" height="43" alt="" /></a>
+            <a href="'.myWeb.'" class="smallogo"><img src="'.frontPath.'logo.png" height="43" alt="" /></a>
             <a class="callusicon" href="tel:'.common::qtext($db,5).'"><span class="fa fa-phone"></span></a>
         </div>  
         <div class="header-wrap">
@@ -27,13 +27,13 @@ function menu($db,$view){
                 <div class="row">
                     <div class="row header-top">
                         <div class="col-md-4 logo hidden-xs hidden-sm">
-                            <a href="'.myWeb.'" title="logo"><img src="'.frontPath.'logo.jpg" alt="" style=""/></a>
+                            <a href="'.myWeb.'" title="logo"><img src="'.frontPath.'logo.png" alt="" style=""/></a>
                         </div>
-                        <div class="header-right hidden-xs hidden-sm">
-                            '.social($db).' 
+                        <div class="header-right hidden-xs hidden-sm">                            
                             <div class="hotline">
-                                <span>Contact us:</span>
-                                <a href="tel:'.common::qtext($db,2).'">'.common::qtext($db,2).'</a>
+                                <a href="tel:'.common::qtext($db,2).'">                                  
+                                    <img src="'.frontPath.'phone.png" height="70" alt="" />
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,8 @@ if(($view == 'trang-chu' && $item['view'] =='home') || ($view == 'search' && $it
             $str.='
                 <li><a href="'.$lnk.'"  class="'.$active.'">'.$title.'</a></li>';
         }
-        $str.='            
+        $str.='  
+                <li>'.social($db).'</li>         
             </ul>
         </nav>
         <!--Menu HTML Code-->    
@@ -152,39 +153,66 @@ function home($db){
             '.wow_slider($db).'
         </div>
     </section>';  
-    common::page('product');
-    $product=new product($db);
-    $str.=$product->ind_product($db);
-    $str.=ind_buy_sell($db);
-    
-    common::page('concierge');
-    $concierge=new concierge($db);
-    $str.=$concierge->ind_concierge(common::qtext($db,13));
-    
     common::page('about');
     $about=new about($db);
     $str.=$about->ind_about(common::qtext($db,15));  
+    common::page('product');
+    $product=new product($db);
+    $str.=$product->ind_product($db);
+    common::page('duoclieu');
+    $duoclieu=new duoclieu($db);
+    $str.=$duoclieu->ind_duoclieu();
+    $str.=ind_baithuocquy_tintuc($db);
+    $str.=ind_tuvan_guicauhoi($db);
     $str.='<div id="google-map"> </div>';
     $str.=gmap();
     
     /*$str.=partner($db);*/
     return $str;
 }
-function ind_buy_sell($db){
-    common::page('buy');
-    $buy=new buy($db);
-    common::page('sell');
-    $sell=new sell($db);
-    return '<div class="row ind-sell-buy">
-            <div class="ind-buy col-md-6 col-middle2-container">
-                <div class="col-middle2">'.
-                   $buy->ind_buy(common::qtext($db,12)).                   
+function ind_baithuocquy_tintuc($db){
+    common::page('baithuocquy');
+    $baithuocquy=new baithuocquy($db);
+    common::page('news');
+    $news=new news($db);
+    return '<div class="container"><div class="row">
+            <div class="col-md-6">
+                <div class="">'.
+                   $baithuocquy->ind_baithuocquy().                   
                 '</div>
             </div>
-            <div class="ind-sell col-md-6">'.
-                   $sell->ind_sell(common::qtext($db,14)).     
+            <div class="col-md-6">'.
+                $news->ind_news().  
             '</div>
+        </div>
         </div>';
+}
+
+function ind_tuvan_guicauhoi($db){
+    common::page('tuvan');
+    $tuvan=new tuvan($db);
+    return '<div class="container"><div class="row">
+            <div class=" col-md-6">
+                <div class="">'.
+                   $tuvan->ind_tuvan().                   
+                '</div>
+            </div>
+            <div class="col-md-6">'.
+                submit_mail().   
+            '</div>
+        </div>
+        </div>';
+}
+function submit_mail(){
+    return '<section id="home-subscribe">
+        <div class="container text-center">
+            <form action="" id="subscribe">
+                <span>Vui lòng để lại email để nhận tin khuyến mãi</span>
+                <input type="email" name="email" placeholder="Nhập email">
+                <input type="submit" value="Gửi">
+            </form>
+        </div>
+    </section>';
 }
 function wow_slider($db){
     $db->reset();
@@ -318,16 +346,16 @@ function partner($db){
     </section>';
     return $str;    
 }
-function concierge($db){
-    common::page('concierge');
-    $concierge=new concierge($db);
-    $str.=$concierge->top_content_sum(common::qtext($db,9));
+function news($db){
+    common::page('news');
+    $news=new news($db);
+    $str.=$news->top_content_sum(common::qtext($db,9));
     if(isset($_GET['id'])){
-        $str.=$concierge->concierge_one(intval($_GET['id']));    
+        $str.=$news->news_one(intval($_GET['id']));    
     }else{
-        $str.=$concierge->concierge_cate();
+        $str.=$news->news_cate();
     }     
-    $str.=$concierge->bottom_content(); 
+    $str.=$news->bottom_content(); 
     return $str;
 }
 function buy($db){
