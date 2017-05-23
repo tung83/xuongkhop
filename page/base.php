@@ -79,7 +79,7 @@ class base{
                 <div class="row '.$this->db_name.'-box">
                     <div class="row '.$fade_wow.'" >
                         <div class="col-xs-12">
-                            <div class="title-head">
+                            <div class="title-head underline-header">
                                 <span>'
                                     .$this->title.' 
                                 </span>

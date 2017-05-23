@@ -142,7 +142,9 @@ $(function() {
             e.preventDefault();
 
             var $form = this;
+            var name = $form.name.value.trim();
             var email = $form.email.value.trim();
+            var content = $form.content.value.trim();
             var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
             if (!email) return alert("Bạn phải nhập email!");
@@ -151,7 +153,7 @@ $(function() {
             $.ajax({
                     type: 'POST',
                     url: "/ajax.php",
-                    data: {act: 'subscribe', email: email },
+                    data: {act: 'subscribe', email: email, name: name, content: content  },
                     success: function() {
                             alert("Cám ơn bạn đã đăng ký nhận tin.");
                             $form.reset();
@@ -218,8 +220,8 @@ $(function() {
     $( window ).resize(function() {
         var marginValue=$(window).width()-1200;
         if(marginValue > 0){
-            $(".ws-title").css('right',marginValue/2+'px');
-            $(".ws_bullets").css('right',marginValue/2+'px');
+            $(".ws-title").css('left',marginValue/2+'px');
+            $(".ws_bullets").css('left',marginValue/2+'px');
         }
         var max_sell_height= Math.max($(".ind-sell").height(), $(".ind-buy").height());
         $(".ind-buy").height(max_sell_height);

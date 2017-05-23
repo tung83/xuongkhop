@@ -20,33 +20,25 @@
         <?php
 
         switch($view){
-            case 'build':
+            case 'dieu-tri-xuong-khop':
                 echo product($db);
                 break;
-            case 'search':
-            case 'tim-kiem':
-                echo search_product($db);
+            case 'duoc-lieu':
+                echo duoclieu($db);
                 break;
-            case 'search_sell':
-            case 'tim-kiem':
-                echo search_sell($db);
+            case 'tu-van':
+                echo tuvan($db);
                 break;
-            case 'buy':
-                echo buy($db);
+            case 'tin-tuc':
+                echo news($db);
                 break;
-            case 'sell':
-                echo sell($db, $view);
-                break;        
-            case 'concierge':
-                echo concierge($db);
+            case 'bai-thuoc-quy':
+                echo baithuocquy($db);
                 break;
-            case 'meet-our-partners':
-                echo partner($db);
-                break;
-            case 'about-us':
+            case 've-gia-toc-luong-y-tam-tai':
                 echo about($db);
                 break;
-            case 'contact-us':
+            case 'lien-he':
                 echo contact($db);
                 break;
             default:

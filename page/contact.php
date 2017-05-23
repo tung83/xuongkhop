@@ -7,47 +7,33 @@ class contact extends base{
     function contact_insert(){
         $this->db->reset();
         if(isset($_POST['contact_send'])){
-            
-                                $name=htmlspecialchars($_POST['name']);
-                                $adds=htmlspecialchars($_POST['adds']);
-                                $phone=htmlspecialchars($_POST['phone']);
-                                $email=htmlspecialchars($_POST['email']);
-                                $subject=htmlspecialchars($_POST['subject']);
-                                $content=htmlspecialchars($_POST['content']);
-                                $purpose='';
-                                if(!empty($_POST['purpose'])) {
-                                    foreach($_POST['purpose'] as $key=>$check) {
-                                        if($key == 0){
-                                            $purpose.= $check; 
-                                        }
-                                        else{
-                                            $purpose.= ', '.$check; 
-                                            
-                                        }
-                                    }
-                                }
-                                $insert=array(
-                                    'name'=>$name,'adds'=>$adds,'phone'=>$phone,
-                                    'email'=>$email,'subject'=>$subject,'content'=>$content, 'purpose'=>$purpose,
-                                    'dates'=>date("Y-m-d H:i:s")
-                                );
-                                try{
-                                    $this->send_mail($insert);
-                                    $this->db->insert('contact',$insert);                
-                                     if(!$this->post_result){
-                                    $this->post_result = ' <div class="alert alert-success"><i class="icon fa fa-check"></i>
-                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                             <strong>Success!</strong>  Your information was submitted successfully. We will contact you soon!
-                                           </div>';
-                                }
-                                        
-                                }catch(Exception $e){
-                                     $this->post_result .= ' <div class="alert alert-warning">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <strong>Error!</strong> '. $e->getMessage() .
-                                      '</div>'; 
-                                }
-                     
+            $name=htmlspecialchars($_POST['name']);
+            $adds=htmlspecialchars($_POST['adds']);
+            $phone=htmlspecialchars($_POST['phone']);
+            $email=htmlspecialchars($_POST['email']);
+            $subject=htmlspecialchars($_POST['subject']);
+            $content=htmlspecialchars($_POST['content']);
+            $insert=array(
+                'name'=>$name,'adds'=>$adds,'phone'=>$phone,
+                'email'=>$email,'subject'=>$subject,'content'=>$content,
+                'dates'=>date("Y-m-d H:i:s")
+            );
+            try{
+                $this->send_mail($insert);
+                $this->db->insert('contact',$insert);                
+                 if(!$this->post_result){
+                $this->post_result = ' <div class="alert alert-success"><i class="icon fa fa-check"></i>
+                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                         <strong>Thành công!</strong>  Thông tin của Quý Khách đã gửi thành công. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất!.
+                       </div>';
+            }
+
+            }catch(Exception $e){
+                 $this->post_result .= ' <div class="alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Lỗi!</strong> '. $e->getMessage() .
+                  '</div>'; 
+            }    
         }
     }
     function contact(){
@@ -57,18 +43,22 @@ class contact extends base{
         $item=$this->db->where('id',3)->getOne('qtext','content');
          
         $str.='    
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <section id="contact-page">
+        <section id="contact-page">        
+            <div class="contact-container">
+            <div class="container">
+            <div class="row">
+                <img src="/file/front/contact-banner.png" class="img-responsive">
+            </div></div></div>
             <div class="container">
                 <div class="row contact-box">
                     <div class="row">
                         <div class="col-xs-12">
-                            <div class="title-head">
+                            <div class="title-head underline-header">
                                 <span>'
                                     .$this->title.' 
                                 </span>                                
                                 <p>
-                                    <i>Thank you for visiting our website. For more information, Please contact:</i>
+                                    <i>Cảm ơn Quý khách đã truy cập vào website. Mọi thông tin chi tiết xin vui lòng liên hệ:</i>
                                 </p>   
                             </div>
                         </div> 
@@ -78,84 +68,48 @@ class contact extends base{
                          {
                              $str.= $this->post_result;
                          }                             
-        $str.=              '<div class="col-md-4 contact-left">
+        $str.=              '<div class="col-sm-6">
                              
-                            <p class="thanks-text">
-                                '.common::qtext($this->db,3).'
-                            </p>     
                             <p>
-                                <img src="'.frontPath.'contact.jpg" class="img-responsive map-image" alt="" title=""/>
-                            </p>     
+                                '.common::qtext($this->db,3).'
+                            </p>      
+                            <p>
+                                <img src="'.frontPath.'contact.png" class="img-responsive" alt="" title=""/>
+                            </p>    
                         </div>
-                        <div class="col-md-7 col-md-offset-1 "> 
-                            <h3 class="contact-right-header">
-                                How can we assist you?
-                            </h3>
+                        <div class="col-sm-6"> 
+                            <p class="text-center">
+                                Chú ý: Dấu (*) các trường bắt buộc phải nhập vào. Quý vị có thể gõ chữ tiếng Việt không dấu hoặc chữ tiếng Việt có dấu theo chuẩn UNICODE (UTF-8).
+                            </p>
                             <form data-toggle="validator" role="form" class="contact-form" name="contact-form" method="post" action="">
                                 <div class="form-group">
-                                    <input type="text" name="name" class="form-control" required placeholder="Name *" />
+                                    <input type="text" name="name" class="form-control" required placeholder="Họ Tên*" />
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="phone" class="form-control" required placeholder="Phone *">
+                                    <input type="email" name="email" class="form-control" required placeholder="Email*" />
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" class="form-control" required placeholder="Điện Thoại*">
                                 </div>   
                                 <div class="form-group">
-                                    <input type="text" name="adds" class="form-control" placeholder="Fax">
-                                </div>  
+                                    <input type="text" name="adds" class="form-control" required placeholder="Địa Chỉ*">
+                                </div>      
                                 <div class="form-group">
-                                    <input type="text" name="subject" class="form-control" placeholder="Company"/>
+                                    <input type="text" name="subject" class="form-control" required placeholder="Chủ Đề*"/>
                                     <div class="help-block with-errors"></div>
-                                </div>   
+                                </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control" required placeholder="Email *" />
-                                    <div class="help-block with-errors"></div>
-                                </div> 
-                                <div class="form-group">
-                                <table class="purpose-check">
-                                    <tr>
-                                    <td>
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="purpose[]" value="custom homes" class=""/>Custom Homes
-                                        </label>
-                                    </td>
-                                    <td>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="purpose[]" value="buy home" class=""/>Buy Home (advocacy)
-                                    </label>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <td>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="purpose[]" value="build new home" class=""/>Build New Home
-                                    </label>
-                                    </td>
-                                    <td>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="purpose[]" value="house" class=""/>House
-                                    </label>
-                                    </td>
-                                    </tr>
-                                    <tr>
-                                    <td>
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="purpose[]" value="sell home" class=""/>Sell Home
-                                    </label>
-                                    </td>
-                                    </tr>
-                                   </table>
-                                    <div class="help-block with-errors"></div>
-                                </div>   
-                                <div class="form-group">
-                                    <textarea name="content" id="content" required class="form-control"  placeholder="Message *" rows="8"></textarea>
+                                    <textarea name="content" id="content" required class="form-control"  placeholder="Nội Dung Tin Nhắn*" rows="8"></textarea>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" name="contact_send" class="btn btn-primary btn-md btn-custom submit-button">
-                                        SEND
+                                        Gửi Tin
                                     </button>
                                     <button type="reset" name="reset" class="btn btn-primary btn-md btn-custom">
-                                        CLEAR
+                                        Xóa
                                     </button>
                                 </div>
                             </form> 
@@ -189,7 +143,7 @@ class contact extends base{
         $mail->AddAddress($basic_config['smtp_receiver']);
         $mail->SMTPAutoTLS = false;
         $mail->CharSet = 'UTF-8';
-        $mail->Subject =  'Customer contacted from website';        
+        $mail->Subject =  'Khách hàng liên hệ gửi từ website';        
         
         $mail->Body = '
         <html>
@@ -199,11 +153,11 @@ class contact extends base{
         <body>
         	<p>Full Name: '.$item['name'].'</p>
         	
-        	<p>Fax: '.$item['adds'].'</p>
+        	<p>Address: '.$item['adds'].'</p>
         	<p>Phone: '.$item['phone'].'</p>
-                <p>Company: '.$item['subject'].'</p>        	
+        	
         	<p>Email: '.$item['email'].'</p>
-                <p>For: '.$item['purpose'].'</p>
+                <p>Tiêu Đề: '.$item['subject'].'</p>
         	<p>Content: '.nl2br($item['content']).'</p>
         </body>
         </html>';

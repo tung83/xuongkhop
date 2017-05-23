@@ -64,7 +64,7 @@ class about extends base{
         $this->paging_shown = ($pg->paginationTotalpages > 0);
         return $str;
     }
-    function about_one($id=1){
+    function about_one2($id=1){
         $item=$this->db->where('id',$id)->getOne('about');
         $title=$item['title'];
         $content=$item['content'];
@@ -75,6 +75,37 @@ class about extends base{
                 </div>
                 <p>'.$content.'</p>
             </article>';                        
+    }
+    
+    function about_one(){
+        $id=1;
+        $item=$this->db->where('id',$id)->getOne('about');
+        $title=$item['title'];
+        $content=$item['content'];
+        return '  
+        <section id="about-us">
+            <div class="container">
+                <div class="row about-us-box">
+                    <div class="row wow fadeInDown animated" data-wow-duration="100ms" data-wow-delay="10ms">
+                        <div class="col-xs-12">
+                            <div class="title-head  underline-header">
+                                <span>'
+                                    .$this->title.' 
+                                </span>
+                            </div>
+                        </div> 
+                        <div class="col-md-12">
+                            <article>
+                                <div class="text-center">
+                                    <h2 class="page-title">'.$title.'</h2>
+                                </div>
+                                <p>'.$content.'</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>';
     }
 }
 

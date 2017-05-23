@@ -7,7 +7,7 @@ class baithuocquy extends base{
         $this->db->reset();
         $this->db->where('active',1)->where('home',1);
         $this->db_orderBy();
-        $list=$this->db->get('baithuocquy',5);
+        $list=$this->db->get('baithuocquy',10);
         $str='
         <div class="ind-baithuocquy">  
                 <div class="row">    

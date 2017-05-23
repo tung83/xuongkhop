@@ -1,7 +1,7 @@
 <?php
 class news extends base{
     function __construct($db){
-        parent::__construct($db,6,'news');
+        parent::__construct($db,4,'news');
     }
     function ind_news(){
         $this->db->reset();
@@ -10,6 +10,8 @@ class news extends base{
         $list=$this->db->get('news',5);
         $str='
         <div class="ind-news">  
+            <div class="container">
+                <div class="row">   
                 <div class="row">    
                     <div class="col-xs-12">
                         <div class="title-head">
@@ -22,46 +24,28 @@ class news extends base{
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=webPath.$item['img'];
             if($img=='') $img='holder.js/126x100';
-            if($key == 0){
-                 $str.='
-                    <div class="news-col wow fadeIn animated" data-wow-duration="100ms">
+            $str.='
+                    <div class="col-md-4 col-sm-6 col-xs-12 news-col wow fadeIn animated" data-wow-duration="1000ms">
                         <div class="news-item">
-                            <div class="col-md-6">
-                                <a href="'.$lnk.'">
-                                    <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
-                                </a>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="'.$lnk.'">
-                                    <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
-                                </a>
-                                <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
-                            </div>
+                            <a href="'.$lnk.'">
+                                <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
+                            </a>
+                            <a href="'.$lnk.'">
+                                <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
+                            </a>
+                            <p class="news-date">'.date("d/m/Y",strtotime($item['date'])).'</p>
+                            <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
                         </div>
                     </div>';   
-            }
-            else{
-                $str.='
-                        <div class="col-xs-12 news-col wow fadeIn animated" data-wow-duration="100ms">
-                            <div class="news-item">
-                                 <div class="col-md-3">
-                                    <a href="'.$lnk.'">
-                                            <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <a href="'.$lnk.'">
-                                        <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
-                                    </a>
-                                    <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
-                                </div>
-                            </div>
-                        </div>';   
-            } 
         }
         $str.='
-                    <div class="clearfix"></div>                       
+                    <div class="clearfix"></div>
+                        <div class="text-center">
+                            <a class="btn btn-primary btn-primary-long see-more" href="'.myWeb.$this->view.'">'.more_button.'</a>      
+                        </div>
                     </div>
+                </div>
+                </div>
             </div>';
         return $str;
     }
@@ -78,6 +62,7 @@ class news extends base{
                     <a href="'.$lnk.'" class="about-item clearfix">
                         <p class="news-title">'.$item['title'].'</p>
                     </a>
+                    <p class="news-date"><i> '.date("d/m/Y",strtotime($item['date'])).'</i></p>
                     <div class="news-sum">
                         <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
                     </div>

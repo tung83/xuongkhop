@@ -164,8 +164,8 @@ function home($db){
     $str.=$duoclieu->ind_duoclieu();
     $str.=ind_baithuocquy_tintuc($db);
     $str.=ind_tuvan_guicauhoi($db);
-    $str.='<div id="google-map"> </div>';
-    $str.=gmap();
+    //$str.='<div id="google-map"> </div>';
+    //$str.=gmap();
     
     /*$str.=partner($db);*/
     return $str;
@@ -203,13 +203,71 @@ function ind_tuvan_guicauhoi($db){
         </div>
         </div>';
 }
+
+function submit_tuvan(){
+    return '<section id="tuvan-subscribe">
+        <div class="">
+            <div class="title-head">
+                <span>Gửi câu hỏi tư vấn 
+                </span>
+            </div>
+            <form data-toggle="validator" role="form"  action="" id="subscribe">
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" required placeholder="Họ và tên" />
+                    <div class="help-block with-errors"></div>
+                </div> 
+                <div class="form-group">
+                    <input type="text" name="address" class="form-control" placeholder="Địa chỉ" />
+                    <div class="help-block with-errors"></div>
+                </div> 
+                <div class="form-group">
+                    <input type="text" name="phone" class="form-control" placeholder="Điện thoại" />
+                    <div class="help-block with-errors"></div>
+                </div> 
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" required placeholder="Email" />
+                    <div class="help-block with-errors"></div>
+                </div> 
+            </div>  
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea name="content" id="content" required class="form-control"  placeholder="Nội dung" rows="8"></textarea>
+                    <div class="help-block with-errors"></div>
+                </div> 
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary form-control"  value="Gửi">
+                </div>
+            </div>  
+            </form>
+        </div>
+    </section>';
+}
+
 function submit_mail(){
     return '<section id="home-subscribe">
-        <div class="container text-center">
-            <form action="" id="subscribe">
-                <span>Vui lòng để lại email để nhận tin khuyến mãi</span>
-                <input type="email" name="email" placeholder="Nhập email">
-                <input type="submit" value="Gửi">
+        <div class="">
+            <div class="title-head">
+                <span>Gửi câu hỏi tư vấn 
+                </span>
+            </div>
+            <form data-toggle="validator" role="form"  action="" id="subscribe">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" required placeholder="Họ và tên" />
+                    <div class="help-block with-errors"></div>
+                </div> 
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" required placeholder="Email" />
+                    <div class="help-block with-errors"></div>
+                </div>  
+                <div class="form-group">
+                    <textarea name="content" id="content" required class="form-control"  placeholder="Nội dung" rows="8"></textarea>
+                    <div class="help-block with-errors"></div>
+                </div> 
+                <div class="form-group">
+                    <input type="submit" class="form-control btn btn-primary"  value="Gửi">
+                </div>
             </form>
         </div>
     </section>';
@@ -315,12 +373,12 @@ function contact($db){
 }
 function about($db){ 
     $str.='
-    <section id="page">';
+    <section id="about-page">';
+     $str.='
+            <div class="about-container"></div>'; 
     common::page('about');
     $about=new about($db);
-    $str.=$about->top_content_sum(common::qtext($db,7));
-    $str.=$about->about_cate();
-    $str.=$about->bottom_content(); 
+    $str.=$about->about_one();
     $str.='
     </section>';
     return $str;    
@@ -349,13 +407,38 @@ function partner($db){
 function news($db){
     common::page('news');
     $news=new news($db);
-    $str.=$news->top_content_sum(common::qtext($db,9));
+    $str.='
+            <div class="news-container">
+            <div class="container">
+            <div class="row">
+                <img src="/file/front/news_banner.png" class="img-responsive">
+            </div></div></div>'; 
+    $str.=$news->top_content();
     if(isset($_GET['id'])){
         $str.=$news->news_one(intval($_GET['id']));    
     }else{
         $str.=$news->news_cate();
     }     
     $str.=$news->bottom_content(); 
+    return $str;
+}
+function tuvan($db){
+    common::page('tuvan');
+    $tuvan=new tuvan($db);
+    $str.='
+            <div class="tuvan-container">
+            <div class="container">
+            <div class="row">
+                <img src="/file/front/tuvan-banner.png" class="img-responsive">
+            </div></div></div>'; 
+    $str.=$tuvan->top_content();
+    if(isset($_GET['id'])){
+        $str.=$tuvan->tuvan_one(intval($_GET['id']));    
+    }else{
+        $str.=$tuvan->tuvan_cate();
+    }  
+    $str.=submit_tuvan();
+    $str.=$tuvan->bottom_content(); 
     return $str;
 }
 function buy($db){
@@ -370,29 +453,12 @@ function buy($db){
     $str.=$buy->bottom_content(); 
     return $str;
 }
-function sell($db){
-    $str.='
-    <section id="sell-page">'; 
-    common::page('sell');
-    $sell=new sell($db);
-    $str.=search_form($db);
-    $str.=$sell->top_content_sum(common::qtext($db,8));
-    if(isset($_GET['id'])){
-        $str.=$sell->sell_one(intval($_GET['id']));    
-    }else{
-        $str.=$sell->sell_cate();
-    }     
-    $str.=$sell->bottom_content(); 
-    return $str;
-}
 function product($db){
     $str.='
     <section id="product-page">';  
-    $str.=search_form($db);
     common::page('product');
     $pd=new product($db);
     
-    $str.=$pd->top_content_sum(common::qtext($db,6));
     if(isset($_GET['id'])){
         $str.=$pd->product_one(intval($_GET['id']));    
     }

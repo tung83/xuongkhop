@@ -94,11 +94,24 @@ a {
       #social_block li a.facebook-link {
         padding-left: 14px; }
 
+form {
+  color: #6c5417; }
+  form .form-control {
+    border-radius: 0; }
+  form .btn-primary {
+    background-color: #79b20a;
+    border-color: #79b20a;
+    border-radius: 0; }
+  form .btn-primary.disabled {
+    background-color: #c2d879;
+    border-color: #c2d879;
+    border-radius: 0; }
+
 .title-head {
   margin-bottom: 40px; }
   .title-head > span {
-    font-size: 45px;
-    margin-top: 90px;
+    font-size: 30px;
+    margin-top: 45px;
     margin-bottom: 10px;
     display: inline-block;
     line-height: 45px;
@@ -111,9 +124,19 @@ a {
       max-width: 680px;
       display: inline-block; }
 
+.underline-header {
+  text-align: center; }
+  .underline-header > span:after {
+    content: "";
+    border-bottom: 4px solid #79b20a;
+    width: 145px;
+    margin: auto;
+    display: block;
+    height: 10px; }
+
 .pagination > .active > a, .pagination > .active span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-  background-color: #ea639e;
-  border-color: #ea639e; }
+  background-color: #79b20a;
+  border-color: #79b20a; }
 
 /* 
 	Header 
@@ -195,8 +218,7 @@ a {
 footer {
   background: url(/file/front/about_bg.png) repeat;
   padding: 60px 0 0;
-  color: #858585;
-  border-top: 7px solid #575757; }
+  color: #858585; }
   footer a {
     color: #858585; }
   footer .footer-content {
@@ -276,7 +298,7 @@ footer {
         ------------------------------------------------
 */
 .ind-product {
-  padding-bottom: 95px; }
+  padding-bottom: 50px; }
 
 .product-col .product-item {
   overflow: hidden;
@@ -300,7 +322,7 @@ footer {
   min-height: 70px;
   width: 100%;
   background: #fff;
-  color: #464646;
+  color: #fff;
   padding: 15px 15px 15px 15px;
   vertical-align: bottom;
   text-align: center;
@@ -314,7 +336,7 @@ footer {
     list-style-type: none; }
     .product-col ul.product-menu li a {
       text-transform: capitalize !important;
-      color: #464646 !important;
+      color: #fff !important;
       font-size: 13px;
       line-height: 35px; }
       .product-col ul.product-menu li a span {
@@ -334,57 +356,26 @@ footer {
           height: 0;
           border-top: 3px solid transparent;
           border-bottom: 3px solid transparent;
-          border-left: 3px solid #464646; }
+          border-left: 3px solid #fff; }
     .product-col ul.product-menu li > hr {
-      margin: 0 20px 0 20px;
-      border-bottom: 1px solid #e3e3e3; }
+      margin: 0 20px 0 20px; }
     .product-col ul.product-menu li.active, .product-col ul.product-menu li:focus {
       background-color: #ffde16;
       color: #fff !important; }
     .product-col ul.product-menu li.active hr, .product-col ul.product-menu li:focus hr, .product-col ul.product-menu li:last-child > hr {
       display: none; }
 
-/* 
-	Sell & buy indicator
-        ------------------------------------------------
-*/
-.ind-sell-buy {
-  color: #fff;
-  margin: 0; }
-  .ind-sell-buy a {
-    color: #fff; }
-  .ind-sell-buy .row {
-    margin: 0; }
-  .ind-sell-buy .item {
-    padding: 20px 0; }
-  .ind-sell-buy .ind-buy {
-    background-color: #ba759a;
-    padding: 90px 60px 50px 0px; }
-    .ind-sell-buy .ind-buy .title-head {
-      margin-bottom: 30px;
-      font-size: 53px;
-      color: #e5c6d6; }
-  .ind-sell-buy .ind-sell {
-    background-color: #ba4272;
-    padding: 90px 0px 50px 60px; }
-    .ind-sell-buy .ind-sell .title-head {
-      text-align: left;
-      margin-bottom: 30px;
-      font-size: 53px;
-      color: #d19dae; }
-  .ind-sell-buy .item-title {
-    font-size: 19px; }
+#product-page .sub-sum {
+  padding-bottom: 30px;
+  padding-top: 30px; }
+  #product-page .sub-sum:after {
+    clear: both; }
+  #product-page .sub-sum:before, #product-page .sub-sum:after {
+    display: table;
+    content: " "; }
+#product-page .product-menu-container {
+  background-color: #79b20a; }
 
-@media (min-width: 992px) {
-  .ind-buy .col-middle2 {
-    float: right; }
-  .ind-buy .buy-item-left {
-    text-align: right; }
-  .ind-buy .title-head {
-    text-align: right; } }
-@media (min-width: 1200px) {
-  .ind-sell > .row, .col-middle2 {
-    width: 555px; } }
 /* 
 	Buy 
         ------------------------------------------------
@@ -630,9 +621,9 @@ footer {
         ------------------------------------------------
 */
 .ind-baithuocquy {
-  padding-bottom: 40px; }
+  padding-bottom: 30px; }
   .ind-baithuocquy .title-head span {
-    border-left: 2px solid #79b20a; }
+    border-left: 3px solid #79b20a; }
   .ind-baithuocquy .baithuocquy-item-title {
     color: #79b20a; }
 
@@ -641,20 +632,58 @@ footer {
         ------------------------------------------------
 */
 .ind-news {
-  padding-bottom: 40px; }
+  padding-bottom: 30px; }
   .ind-news .title-head span {
-    border-left: 2px solid #79b20a; }
+    border-left: 3px solid #79b20a; }
   .ind-news .news-item-title {
     color: #79b20a; }
+
+.news-container {
+  background-color: #014471; }
+
+.news-title {
+  font-size: 16px;
+  color: #79b20a; }
 
 /* 
 	Tu van
         ------------------------------------------------
 */
 .ind-tuvan {
-  padding-bottom: 40px; }
+  padding-bottom: 30px; }
   .ind-tuvan .title-head span {
-    border-left: 2px solid #79b20a; }
+    border-left: 3px solid #79b20a; }
+  .ind-tuvan .tuvan-item-title img {
+    height: 50px;
+    width: 50px;
+    margin-right: 15px; }
+
+.tuvan-container {
+  background-color: #b2c0c1; }
+
+.tuvan-title {
+  font-size: 16px;
+  color: #79b20a; }
+
+#tuvan-subscribe .title-head {
+  text-align: center; }
+#tuvan-subscribe .form-control[name="content"] {
+  height: 213px; }
+
+.question-mark {
+  float: left; }
+
+.tuvan-line {
+  float: left;
+  margin-left: 10px;
+  margin-bottom: 30px; }
+
+#subscribe .form-control {
+  padding: 20px 12px !important; }
+#subscribe .btn {
+  height: 55px;
+  font-size: 20px;
+  padding-top: 12px !important; }
 
 /* 
 	About
@@ -662,19 +691,11 @@ footer {
 */
 .ind-about {
   padding-bottom: 5px;
-  background: url(/file/front/about_bg.png) repeat; }
-  .ind-about .about-title-head {
-    text-align: center;
-    margin-bottom: 10px; }
-    .ind-about .about-title-head > span {
-      font-size: 66px;
-      font-weight: 580;
-      margin-top: 0px;
-      margin-bottom: 10px;
-      display: inline-block;
-      line-height: 80px;
-      color: #000;
-      padding-bottom: 20px; }
+  background: url(/file/front/about_bg.png) repeat;
+  padding-top: 28px;
+  padding-bottom: 17px; }
+  .ind-about .title-head > span {
+    margin-top: 0px; }
   .ind-about .about-col {
     padding: 0.5px; }
   .ind-about .about-3dot img {
@@ -682,6 +703,12 @@ footer {
 
 .about-box {
   margin-bottom: 15px; }
+
+.about-container {
+  height: 200px;
+  overflow: hidden;
+  width: 100%;
+  background: url(/file/front/about-banner.png) no-repeat center center; }
 
 /* 
 	Contact
@@ -704,19 +731,11 @@ footer {
     margin-top: 0; }
   .contact-wrap .contact-form {
     color: #6c5417; }
-    .contact-wrap .contact-form .form-control {
-      border-color: #6c5417;
-      border-radius: 0; }
-    .contact-wrap .contact-form .btn-primary {
-      background-color: #ca256a;
-      border-color: #b20f53;
-      border-radius: 0; }
-    .contact-wrap .contact-form .btn-primary.disabled {
-      background-color: #d3407d;
-      border-color: #ca256a;
-      border-radius: 0; }
     .contact-wrap .contact-form .purpose-check tr td:first-child {
       padding-right: 25px; }
+
+.contact-container {
+  background-color: #b7b7b7; }
 
 @media (min-width: 1060px) {
   .contact-wrap {
@@ -727,8 +746,9 @@ footer {
         ------------------------------------------------
 */
 #wowslider-container1 .ws_bullets {
-  bottom: 50% !important;
-  left: auto !important; }
+  right: auto !important; }
+  #wowslider-container1 .ws_bullets div {
+    left: 0; }
   #wowslider-container1 .ws_bullets a {
     background: #fff !important;
     margin-bottom: 3px; }
@@ -760,10 +780,14 @@ footer {
     background-color: transparent !important; }
   #wowslider-container1 .ws-title div {
     background-color: transparent !important; }
-#wowslider-container1 .not-has-title .ws-title {
+
+.not-has-title .ws-title {
   width: 0 !important; }
-#wowslider-container1 .not-has-title .ws_bullets {
+
+.not-has-title .ws_bullets {
   bottom: 0 !important; }
+  .not-has-title .ws_bullets > div {
+    left: 0 !important; }
 
 @media (max-width: 991px) {
   .ws-title-wrapper {
