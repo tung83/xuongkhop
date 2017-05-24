@@ -1,14 +1,14 @@
 <?php
 function mainProcess($db)
 {
-    return concierge($db);
+    return news($db);
 }
-function concierge($db)
+function news($db)
 {
 	$msg='';
-    $act='concierge';
-    $type='concierge';
-    $table='concierge';
+    $act='news';
+    $type='news';
+    $table='news';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
             $db->where('id',$_POST['idLoad']);
             $list = $db->getOne($table);
@@ -20,7 +20,7 @@ function concierge($db)
 	}
 	if(isset($_POST["addNew"])||isset($_POST["update"])) {
             $title=htmlspecialchars($_POST['title']);	   
-            $sum=str_replace("'","",$_POST['sum']);
+            $sum=htmlspecialchars($_POST['sum']);
             $content=str_replace("'","",$_POST['content']);
             $meta_kw=htmlspecialchars($_POST['meta_keyword']);
             $meta_desc=htmlspecialchars($_POST['meta_description']);
@@ -29,6 +29,8 @@ function concierge($db)
             $file=time().$_FILES['file']['name'];
             $ind=intval($_POST['ind']);
             
+            $dateInfo = date_parse_from_format('d/m/Y', $_POST['date']);
+            $date = $dateInfo['year'].'-'.$dateInfo['month'].'-'.$dateInfo['day'];
             $pId=intval($_POST['frm_cate_1']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
@@ -48,12 +50,13 @@ function concierge($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
+                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
                     try{
                 $recent = $db->insert($table,$insert);
                 if(common::file_check($_FILES['file'])){
-                    WideImage::load('file')->resize(420,350, 'fill')->saveToFile(myPath.$file);
+                    WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
                     $db->where('id',$recent);
                     $db->update($table,array('img'=>$file));
                 }
@@ -67,10 +70,11 @@ function concierge($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
+                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
             if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(420,350, 'fill')->saveToFile(myPath.$file);
+                WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
                 $update = array_merge($update,array('img'=>$file));
                 $form->img_remove($_POST['idLoad'],$db,$table);
             }
@@ -95,14 +99,14 @@ function concierge($db)
 	}
     
     $page_head= array(
-                    array('#','Danh sách Concierge')
+                    array('#','Danh sách tin tức')
                 );
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     
-    $str.=$form->search_area($db,$act,'concierge_cate',$_GET['hint'],0);
+    $str.=$form->search_area($db,$act,'news_cate',$_GET['hint'],0);
     
-    $head_title=array('Tiêu đề','Hiện/Ẩn','STT');
+    $head_title=array('Tiêu đề','Hình ảnh','Hiện/Ẩn','STT');
 	$str.=$form->table_start($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
@@ -116,6 +120,7 @@ function concierge($db)
         foreach($list as $item){
             $item_content = array(
                 array($item['title'],'text'),
+                array(myPath.$item['img'],'image'),
                 array($item['active'],'bool'),
                 array($item['ind'],'text')
             );
@@ -129,12 +134,16 @@ function concierge($db)
 	<div class="row">
     	<div class="col-lg-12"><h3>Cập nhật - Thêm mới thông tin</h3></div>
         <div class="col-lg-12">
-         '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'       
-            '.$form->ckeditor('content',array('label'=>'Nội dung')).'
+         '.$form->text('title',array('label'=>'Tiêu đề','required'=>true)).'      
+            '.$form->textarea('sum',array('label'=>'Trích Dẫn','required'=>true)).'      
+            '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
+            '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
+            '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
+            '.$form->datepicker('date',array('label'=>'Ngày','required'=>true)).'
              
         </div>
         <div class="col-lg-12">
-            '.$form->file('img',420,350).'
+            '.$form->file('img',800,550).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('home',array('label'=>'Trang chủ')).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'
