@@ -2,7 +2,6 @@
 include_once 'front.php';
 include_once 'object/form.php';
 common::page('base');
-include_once 'page/search.php';
 function pageId($view){
     if($view == 'trang-chu')
     {
@@ -422,6 +421,35 @@ function news($db){
     $str.=$news->bottom_content(); 
     return $str;
 }
+function duoclieu($db){
+    common::page('duoclieu');
+    $duoclieu=new duoclieu($db);
+    $str.='
+            <div class="about-container"></div>'; 
+    $str.=$duoclieu->top_content();
+    if(isset($_GET['id'])){
+        $str.=$duoclieu->duoclieu_one(intval($_GET['id']));    
+    }else{
+        $str.=$duoclieu->duoclieu_cate();
+    }     
+    $str.=$duoclieu->bottom_content(); 
+    return $str;
+}
+
+function baithuocquy($db){
+    common::page('baithuocquy');
+    $baithuocquy=new baithuocquy($db);
+    $str.='
+            <div class="about-container"></div>'; 
+    $str.=$baithuocquy->top_content();
+    if(isset($_GET['id'])){
+        $str.=$baithuocquy->baithuocquy_one(intval($_GET['id']));    
+    }else{
+        $str.=$baithuocquy->baithuocquy_cate();
+    }     
+    $str.=$baithuocquy->bottom_content(); 
+    return $str;
+}
 function tuvan($db){
     common::page('tuvan');
     $tuvan=new tuvan($db);
@@ -467,15 +495,6 @@ function product($db){
         $str.=resize_product_cate();
     }
     $str.=$pd->bottom_content(); 
-    return $str;
-}
-function search_sell($db){
-    $str.='
-    <section id="search-sell-page">';  
-    $str.=search_form($db);
-    common::page('sell');
-    $pd=new sell($db);
-    $str.=$pd->sell_search($db);   
     return $str;
 }
 function search_product($db){

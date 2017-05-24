@@ -33,16 +33,17 @@ class baithuocquy extends base{
                             </div>
                             <div class="col-md-6">
                                 <a href="'.$lnk.'">
-                                    <p class="baithuocquy-item-title">'.common::str_cut($item['title'],30).'</p>
+                                    <p class="baithuocquy-item-title">'.$item['title'].'</p>
                                 </a>
-                                <p class="baithuocquy-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
+                                <p class="baithuocquy-item-sum">'.$item['sum'].'</p>
                             </div>
                         </div>
-                    </div>';   
+                    </div>
+                    <div class="clearfix"></div>  ';    
             }
             else{
                 $str.='
-                        <div class="col-xs-12 baithuocquy-col wow fadeIn animated" data-wow-duration="100ms">
+                        <div class="baithuocquy-col wow fadeIn animated" data-wow-duration="100ms">
                             <div class="baithuocquy-item">
                                  <div class="col-md-3">
                                     <a href="'.$lnk.'">
@@ -51,12 +52,13 @@ class baithuocquy extends base{
                                 </div>
                                 <div class="col-md-9">
                                     <a href="'.$lnk.'">
-                                        <p class="baithuocquy-item-title">'.common::str_cut($item['title'],30).'</p>
+                                        <p class="baithuocquy-item-title">'.$item['title'].'</p>
                                     </a>
-                                    <p class="baithuocquy-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
+                                    <p class="baithuocquy-item-sum">'.$item['sum'].'</p>
                                 </div>
                             </div>
-                        </div>';   
+                        </div>
+                    <div class="clearfix"></div>  ';    
             }
         }
         $str.='
@@ -76,9 +78,8 @@ class baithuocquy extends base{
                 </div>
                 <div class="col-xs-7">
                     <a href="'.$lnk.'" class="about-item clearfix">
-                        <p class="baithuocquy-title">'.$item['title'].'</p>
+                        <p class="baithuocquy-title item-title">'.$item['title'].'</p>
                     </a>
-                    <p class="baithuocquy-date"><i> '.date("d/m/Y",strtotime($item['date'])).'</i></p>
                     <div class="baithuocquy-sum">
                         <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
                     </div>

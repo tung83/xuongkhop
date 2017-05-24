@@ -72,8 +72,12 @@ function subscriber($db)
 			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped">
 					<thead>
-						<tr>							
-							<th>Email</th>				
+						<tr>					
+							<th>Họ tên</th>					
+							<th>Địa chỉ</th>					
+							<th>Điện thoại</th>							
+							<th>Email</th>								
+							<th>Nội dung</th>				
 							<th>Ngày</th>
 						</tr>
 					</thead>
@@ -89,7 +93,11 @@ function subscriber($db)
 		$active=$item['active']?'<span class="glyphicon glyphicon-ok"></span>':'<span class="glyphicon glyphicon-remove"></span>';
 		$str.='
 		<tr>
+			<td>'.$item['name'].'</td>		
+			<td>'.$item['address'].'</td>		
+			<td>'.$item['phone'].'</td>		
 			<td><a href="mailto:'.$item['email'].'">'.$item['email'].'</a></td>
+			<td>'.$item['content'].'</td>		
 			<td>'.$item['dates'].'</td>		
 		</tr>
 		';	

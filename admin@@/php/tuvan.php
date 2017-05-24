@@ -1,14 +1,14 @@
 <?php
 function mainProcess($db)
 {
-    return news($db);
+    return tuvan($db);
 }
-function news($db)
+function tuvan($db)
 {
 	$msg='';
-    $act='news';
-    $type='news';
-    $table='news';
+    $act='tuvan';
+    $type='tuvan';
+    $table='tuvan';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
             $db->where('id',$_POST['idLoad']);
             $list = $db->getOne($table);
@@ -29,8 +29,6 @@ function news($db)
             $file=time().$_FILES['file']['name'];
             $ind=intval($_POST['ind']);
             
-            $dateInfo = date_parse_from_format('d/m/Y', $_POST['date']);
-            $date = $dateInfo['year'].'-'.$dateInfo['month'].'-'.$dateInfo['day'];
             $pId=intval($_POST['frm_cate_1']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
@@ -50,16 +48,11 @@ function news($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
-                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
                     try{
                 $recent = $db->insert($table,$insert);
-                if(common::file_check($_FILES['file'])){
-                    WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
-                    $db->where('id',$recent);
-                    $db->update($table,array('img'=>$file));
-                }
+                
                 header("location:".$_SERVER['REQUEST_URI'],true); 
             } catch(Exception $e) {
                 $msg=$e->getMessage();
@@ -70,14 +63,9 @@ function news($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
-                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
-            if(common::file_check($_FILES['file'])){
-                WideImage::load('file')->resize(800,550, 'fill')->saveToFile(myPath.$file);
-                $update = array_merge($update,array('img'=>$file));
-                $form->img_remove($_POST['idLoad'],$db,$table);
-            }
+            
             try{
                 $db->where('id',$_POST['idLoad']);
                 $db->update($table,$update);  
@@ -104,9 +92,9 @@ function news($db)
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     
-    $str.=$form->search_area($db,$act,'news_cate',$_GET['hint'],0);
+    $str.=$form->search_area($db,$act,'tuvan_cate',$_GET['hint'],0);
     
-    $head_title=array('Tiêu đề','Hình ảnh','Hiện/Ẩn','STT');
+    $head_title=array('Tiêu đề','Hiện/Ẩn','STT');
 	$str.=$form->table_start($head_title);
 	
     $page=isset($_GET["page"])?intval($_GET["page"]):1;
@@ -120,7 +108,6 @@ function news($db)
         foreach($list as $item){
             $item_content = array(
                 array($item['title'],'text'),
-                array(myPath.$item['img'],'image'),
                 array($item['active'],'bool'),
                 array($item['ind'],'text')
             );
@@ -139,11 +126,9 @@ function news($db)
             '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
             '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
             '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
-            '.$form->datepicker('date',array('label'=>'Ngày','required'=>true)).'
              
         </div>
         <div class="col-lg-12">
-            '.$form->file('img',800,550).'
             '.$form->number('ind',array('label'=>'Thứ tự')).'
             '.$form->checkbox('home',array('label'=>'Trang chủ')).'
             '.$form->checkbox('active',array('label'=>'Hiển Thị','checked'=>true)).'

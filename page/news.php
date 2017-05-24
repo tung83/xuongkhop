@@ -18,7 +18,7 @@ class news extends base{
                             </span>
                         </div>
                     </div>';
-        foreach($list as $item){
+        foreach($list as $key=>$item){
             $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
             $img=webPath.$item['img'];
             if($img=='') $img='holder.js/126x100';
@@ -33,16 +33,17 @@ class news extends base{
                             </div>
                             <div class="col-md-6">
                                 <a href="'.$lnk.'">
-                                    <p class="news-item-title">'.common::str_cut($item['title'],30).'</p>
+                                    <p class="news-item-title">'.$item['title'].'</p>
                                 </a>
-                                <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
+                                <p class="news-item-sum">'.$item['sum'].'</p>
                             </div>
                         </div>
-                    </div>';   
+                    </div>
+                    <div class="clearfix"></div>  ';   
             }
             else{
                 $str.='
-                        <div class="col-xs-12 news-col wow fadeIn animated" data-wow-duration="100ms">
+                        <div class="news-col wow fadeIn animated" data-wow-duration="100ms">
                             <div class="news-item">
                                  <div class="col-md-3">
                                     <a href="'.$lnk.'">
@@ -56,7 +57,8 @@ class news extends base{
                                     <p class="news-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
                                 </div>
                             </div>
-                        </div>';   
+                        </div>
+                    <div class="clearfix"></div>';   
             } 
         }
         $str.='

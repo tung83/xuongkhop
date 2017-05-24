@@ -53,7 +53,7 @@ class product extends base{
     function product_item($item){
         $lnk=myWeb.$this->view.'/'.common::slug($item['title']).'-i'.$item['id'];
         return '
-            <div class="row news-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
+            <div class="row product-item wow fadeInLeft animated" data-wow-duration="1000ms" data-wow-delay="10ms">
                 <div class="col-xs-3">
                     <a href="'.$lnk.'" class="about-item ">
                         <img src="'.webPath.$item['img'].'" class="img-responsive" alt="" title=""/>
@@ -61,9 +61,9 @@ class product extends base{
                 </div>
                 <div class="col-xs-7">
                     <a href="'.$lnk.'" class="about-item clearfix">
-                        <p class="news-title">'.$item['title'].'</p>
+                        <p class="product-title">'.$item['title'].'</p>
                     </a>
-                    <div class="news-sum">
+                    <div class="product-sum">
                         <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
                     </div>
                 </div>
@@ -202,7 +202,31 @@ class product extends base{
         $this->paging_shown = ($pg->paginationTotalpages > 0);
         return $str;
     }
-    function product_one($id){
+    function product_one($id=1){
+        $item=$this->db->where('id',$id)->getOne('product');
+        $title=$item['title'];
+        $content=$item['content'];
+        return  
+            '
+            <div class="container">
+            <div class="row">
+                <div class="title-head underline-header">
+                    <span>'.$this->title.'
+                    </span>
+                    <div class="sub-sum">'
+                        .common::qtext($this->db,11).
+                    '</div>
+                </div>
+            <div class="clearfix"></div>
+            <article>
+                <div class="text-center">
+                    <h2 class="page-title">'.$title.'</h2>
+                </div>
+                <p>'.$content.'</p>
+            </article></div>
+                </div>';                        
+    }
+    function product_one2($id){
         $this->db->where('id',$id);
         $item=$this->db->getOne('product','id,price,price_reduce,title,content,pId,feature,manual,promotion,video');
         $this->db->where('pId',$item['pId'])->where('id',$item['id'],'<>')->where('active',1)->orderBy('rand()');

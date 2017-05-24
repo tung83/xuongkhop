@@ -145,6 +145,13 @@ $(function() {
             var name = $form.name.value.trim();
             var email = $form.email.value.trim();
             var content = $form.content.value.trim();
+            var phone = '';
+            var address = '';
+            if(typeof $form.phone !== "undefined" && typeof $form.address !== "undefined")
+            {
+                phone = $form.phone.value.trim();
+                address = $form.address.value.trim();
+            }
             var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
             if (!email) return alert("Bạn phải nhập email!");
@@ -153,7 +160,7 @@ $(function() {
             $.ajax({
                     type: 'POST',
                     url: "/ajax.php",
-                    data: {act: 'subscribe', email: email, name: name, content: content  },
+                    data: {act: 'subscribe', email: email, name: name, content: content,phone: phone, address: address  },
                     success: function() {
                             alert("Cám ơn bạn đã đăng ký nhận tin.");
                             $form.reset();

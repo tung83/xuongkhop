@@ -84,6 +84,8 @@ form{color: #6c5417;
               span{ max-width: 680px; display: inline-block; }
     }
 }
+
+.item-title{color: $dark-grey;}
 .underline-header{
     text-align: center;
     > span:after {
@@ -225,6 +227,7 @@ footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; co
 */
 
 .ind-product{ padding-bottom: 50px;}
+.ind-product-item{text-align: left;}
 .product-col {
     .product-item { overflow: hidden; 
     box-shadow: 0px 0px 8px #e1e1e1;
@@ -288,8 +291,9 @@ footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; co
             content: " ";
         }
     }
-    .product-menu-container{background-color:$dark-grey;}
+    .product-menu-container{background-color:$dark-grey; text-align:left;}
 } 
+.product-list .news-item{text-align: left; margin-bottom: 25px;}
 /* 
 	Buy 
         ------------------------------------------------
@@ -321,7 +325,7 @@ footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; co
             min-height: 70px;
             width: 100%;
             background: #fff;
-            color: #464646;
+            color: $dark-grey;
             padding: 15px 15px 15px 15px;
             vertical-align: bottom;
             text-align: center;
@@ -448,15 +452,16 @@ footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; co
             @include animate( transform, 0.3s );
         }
     }
-    &:hover .duoclieu-item img, &:focus .duoclieu-item img, &:active .duoclieu-item img, {@include transform( scale(1.1) ); 
-    }
+    //&:hover .duoclieu-item img, &:focus .duoclieu-item img, &:active .duoclieu-item img, {@include transform( scale(1.1) ); 
+    //}
+    .duoclieu-content{min-height: 124px; }
     .duoclieu-item-title{
-            min-height: 70px;
             width: 100%;
             color: #97f7ff;
-            padding: 15px 15px 15px 15px;
-            vertical-align: bottom;
+            padding: 15px 15px 0 15px;
+            vertical-align: bottom;text-align: center; font-size: 16px;
         }  
+    .duoclieu-item-sum{padding: 0 15px 15px 15px; text-align: center; color: #fff;}
     ul.duoclieu-menu {font-weight: normal;font-size: 16px;padding: 15px 0 5px 0;
         li {position: relative;list-style-type: none;
             a {text-transform: capitalize !important;color: #464646 !important;font-size: 13px;line-height: 35px;
@@ -498,6 +503,7 @@ footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; co
 .ind-baithuocquy{padding-bottom: 30px;
     .title-head span{border-left:3px solid $dark-grey;}
     .baithuocquy-item-title {color: $dark-grey; }
+    .baithuocquy-item{ margin-bottom: 15px;}
 }
 
 /* 
@@ -507,9 +513,12 @@ footer { background: url(/file/front/about_bg.png) repeat; padding: 60px 0 0; co
 .ind-news{padding-bottom: 30px;
     .title-head span{border-left:3px solid $dark-grey;}
     .news-item-title {color: $dark-grey; }
+    .news-item{ margin-bottom: 15px;}
 }
 .news-container{background-color: #014471;}
 .news-title{font-size:16px;color: $dark-grey; }
+
+
 /* 
 	Tu van
         ------------------------------------------------

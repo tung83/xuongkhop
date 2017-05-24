@@ -29,8 +29,6 @@ function news($db)
             $file=time().$_FILES['file']['name'];
             $ind=intval($_POST['ind']);
             
-            $dateInfo = date_parse_from_format('d/m/Y', $_POST['date']);
-            $date = $dateInfo['year'].'-'.$dateInfo['month'].'-'.$dateInfo['day'];
             $pId=intval($_POST['frm_cate_1']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
@@ -50,7 +48,6 @@ function news($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
-                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
                     try{
@@ -70,7 +67,6 @@ function news($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
-                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
             if(common::file_check($_FILES['file'])){
@@ -139,7 +135,6 @@ function news($db)
             '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
             '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
             '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
-            '.$form->datepicker('date',array('label'=>'Ngày','required'=>true)).'
              
         </div>
         <div class="col-lg-12">

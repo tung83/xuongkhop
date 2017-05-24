@@ -1,14 +1,14 @@
 <?php
 function mainProcess($db)
 {
-    return news($db);
+    return baithuocquy($db);
 }
-function news($db)
+function baithuocquy($db)
 {
 	$msg='';
-    $act='news';
-    $type='news';
-    $table='news';
+    $act='baithuocquy';
+    $type='baithuocquy';
+    $table='baithuocquy';
     if(isset($_POST["Edit"])&&$_POST["Edit"]==1){
             $db->where('id',$_POST['idLoad']);
             $list = $db->getOne($table);
@@ -29,8 +29,6 @@ function news($db)
             $file=time().$_FILES['file']['name'];
             $ind=intval($_POST['ind']);
             
-            $dateInfo = date_parse_from_format('d/m/Y', $_POST['date']);
-            $date = $dateInfo['year'].'-'.$dateInfo['month'].'-'.$dateInfo['day'];
             $pId=intval($_POST['frm_cate_1']);
 	}
     if(isset($_POST['listDel'])&&$_POST['listDel']!=''){
@@ -50,7 +48,6 @@ function news($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
-                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
                     try{
@@ -70,7 +67,6 @@ function news($db)
                 'title'=>$title,'sum'=>$sum,'content'=>$content,
                 'meta_keyword'=>$meta_kw,
                 'meta_description'=>$meta_desc,
-                'date'=>$date,
                 'home'=>$home,'active'=>$active,'ind'=>$ind,'pId'=>$pId
             );
             if(common::file_check($_FILES['file'])){
@@ -104,7 +100,7 @@ function news($db)
 	$str=$form->breadcumb($page_head);
 	$str.=$form->message($msg);
     
-    $str.=$form->search_area($db,$act,'news_cate',$_GET['hint'],0);
+    $str.=$form->search_area($db,$act,'baithuocquy_cate',$_GET['hint'],0);
     
     $head_title=array('Tiêu đề','Hình ảnh','Hiện/Ẩn','STT');
 	$str.=$form->table_start($head_title);
@@ -139,7 +135,6 @@ function news($db)
             '.$form->text('meta_keyword',array('label'=>'Keyword<code>SEO</code>','required'=>true)).'      
             '.$form->textarea('meta_description',array('label'=>'Meta Description<code>SEO</code>','required'=>true)).'   
             '.$form->ckeditor('content',array('label'=>'Nội dung','required'=>true)).'
-            '.$form->datepicker('date',array('label'=>'Ngày','required'=>true)).'
              
         </div>
         <div class="col-lg-12">

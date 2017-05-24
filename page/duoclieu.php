@@ -26,15 +26,17 @@ class duoclieu extends base{
             if($img=='') $img='holder.js/126x100';
             
             $str.='
-                    <div class="col-md-4 col-sm-6 col-xs-12 duoclieu-col wow fadeIn animated" data-wow-duration="1000ms">
+                    <div class="col-md-4 col-sm-6 col-xs-12 duoclieu-col wow fadeIn animated" data-wow-duration="100ms">
                         <div class="duoclieu-item">
                             <a href="'.$lnk.'">
                                 <img src="'.$img.'" alt="'.$item['title'].'" class="img-responsive"/>
                             </a>
+                            <div class="duoclieu-content">
                             <a href="'.$lnk.'">
-                                <p class="duoclieu-item-title">'.common::str_cut($item['title'],30).'</p>
+                                <p class="duoclieu-item-title">'.$item['title'].'</p>
                             </a>
-                            <p class="duoclieu-item-sum">'.nl2br(common::str_cut($item['sum'],300)).'</p>
+                            <p class="duoclieu-item-sum">'.$item['sum'].'</p>
+                            </div>
                         </div>
                     </div>';   
         }
@@ -58,9 +60,8 @@ class duoclieu extends base{
                 </div>
                 <div class="col-xs-7">
                     <a href="'.$lnk.'" class="about-item clearfix">
-                        <p class="duoclieu-title">'.$item['title'].'</p>
+                        <p class="duoclieu-title item-title">'.$item['title'].'</p>
                     </a>
-                    <p class="duoclieu-date"><i> '.date("d/m/Y",strtotime($item['date'])).'</i></p>
                     <div class="duoclieu-sum">
                         <span>'.nl2br(common::str_cut($item['sum'],620)).'</span>
                     </div>
