@@ -69,16 +69,15 @@ function contact($db)
 	<!-- Row -->
 	<div class="row">
 		 <div class="col-lg-12">
-			<div class="table-responsive " style="max-height: 700px">
-				<table id= "contact-table" class="table table-bordered table-hover table-striped">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover table-striped">
 					<thead>
 						<tr>
 							<th>ID</th>							
 							<th>Họ&Tên</th>
-							<th>Fax</th>							
+							<th>Địa chỉ</th>							
 							<th>Email</th>
-							<th>Company</th>
-							<th>Sections</th>
+							<th>Chủ đề</th>
 							<th width="40%">Nội dung</th>
 							<th style="width:10% !important">Options</th>
 						</tr>
@@ -86,7 +85,7 @@ function contact($db)
 					<tbody>
 					';
 	$page=isset($_GET["page"])?intval($_GET["page"]):1;
-    $db->pageLimit=100000;
+    $db->pageLimit=ad_lim;
     $db->orderBy('id');
     $list=$db->paginate($table,$page);
     
@@ -100,7 +99,6 @@ function contact($db)
 			<td>'.$item['adds'].'</td>
 			<td><a href="mailto:'.$item['email'].'">'.$item['email'].'</a></td>
 			<td>'.$item['subject'].'</td>
-			<td>'.$item['purpose'].'</td>
 			<td>'.nl2br($item['content']).'</td>
 			<td align="center">
 		';
@@ -118,7 +116,7 @@ function contact($db)
 				</div>';
 	$pg = new Pagination();
     $pg->pagenumber = $page;
-    $pg->pagesize = 100000;
+    $pg->pagesize = ad_lim;
     $pg->totalrecords = $db->totalCount;
     $pg->paginationstyle = 1; // 1: advance, 0: normal
     $pg->defaultUrl = "main.php?act=$act";
@@ -128,16 +126,15 @@ function contact($db)
 			</div>
 		</div>
 		<!-- Row -->
-		<div class="row">
+		<form role="form" name="actionForm" enctype="multipart/form-data" action="" method="post">
+		
 		<div class="col-lg-12">
 			<input type="hidden" name="idLoad" value="'.$_POST["idLoad"].'"/>
 			<input type="hidden" name="Edit"/>
-			<input type="hidden" name="Del"/>
-<button id="contact-export" class="btn btn-primary">Export</button>	
+			<input type="hidden" name="Del"/>	
 		</div>
-		</div>
-
 	</div>
+	</form>
 	';	
 	return $str;		
 }

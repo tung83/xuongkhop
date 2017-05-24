@@ -5,6 +5,8 @@ switch($act){
     case 'subscribe':    
         $insert=array(
                 'name'=>$_POST['name'],
+                'email'=>$_POST['address'],
+                'email'=>$_POST['phone'],
                 'email'=>$_POST['email'],
                 'content'=>$_POST['content'],
                 'dates'=>date("Y-m-d H:i:s")

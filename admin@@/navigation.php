@@ -7,13 +7,14 @@ function ad_menu()
                     array(2,"Giới thiệu","about","credit-card"),
                     array(3,'Build',"product","dropbox"),
                     array(16,'Buy',"buy","dropbox"),
-                    array(17,'Sell',"sell","dropbox"),
+                    array(5,'Tin tức','news','pencil-square-o'), 
 					/*array(3,"Quản lý phụ tùng","accessary","pencil"),	*/	
                     array(4,'Concierge','concierge','anchor'),   
                     array(6,'Đối tác','partner','briefcase'), 
                     //array(9,'Video','video','youtube'),
                     /*array(14,'Hỗ trợ trực tuyến','support_online','headphones'),*/
                     //array(14,'Đặt hàng','cart','shopping-cart'),
+                    array(9,'Câu hỏi tư vấn','subscriber','user'),
                     array(8,'Liên hệ','contact','users'), 
                     array(11,"Pages SEO","seo","book"),
                     array(12,"Quản lý text","qtext","folder-open"),
@@ -35,13 +36,7 @@ function ad_menu()
                     array(12,"Home - Buy Sum","id=12"),                          
                     array(12,"Home - Sell Sum","id=14"),              
                     array(12,"Home - Concierge Sum","id=13"),                  
-                    array(12,"Home - About Sum","id=15"),  
-                  
-                    array(12,"Summary đầu trang Build","id=6"),                   
-                    array(12,"Summary đầu trang About","id=7"),                    
-                    array(12,"Summary đầu  trang Sell","id=8") ,                          
-                    array(12,"Summary đầu trang Buy","id=10"),               
-                    array(12,"Summary đầu trang Concierge","id=9")            
+                    array(12,"Home - About Sum","id=15"),          
             
 				);
 	$size=sizeof($topNav);
